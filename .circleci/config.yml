@@ -14,15 +14,26 @@ jobs:
 
     working_directory: /go/src/github.com/mihailo-misic/company-resource-api
 
-#    environment:
-#          TEST_RESULTS: /tmp/test-results
+    environment:
+          TEST_RESULTS: /tmp/test-results
 
     steps:
       - checkout
-#      - run: mkdir -p ${TEST_RESULTS}
+      - run: mkdir -p $TEST_RESULTS
       # Getting deps
       - run: go get -v -t -d ./...
       - run: go get github.com/mattn/goveralls
       # Testing
-      - run: go test -v -cover -race -coverprofile=./c.out
-      - run: goveralls -coverprofile=./c.out -service=circle-ci -repotoken=yCn3klc8SDmcBsJmiov4DOGl5gLgdYlGq
+      - run: go test -v -cover -race -coverprofile=${TEST_RESULTS}/c.out
+      - run:
+          name: Run unit tests
+          command: |
+          trap "goveralls -coverprofile=${TEST_RESULTS}/c.out -service=circle-ci -repotoken=yCn3klc8SDmcBsJmiov4DOGl5gLgdYlGq" EXIT
+          make test | tee ${TEST_RESULTS}/c.out
+      -run: make
+      - store_artifacts:
+          path: /tmp/test-results
+      - store_test_results:
+          path: /tmp/test-results
+
+
