@@ -21,7 +21,7 @@ jobs:
 
       # Testing
       - run: ginkgo -r -cover -coverpkg=./... -trace -race
-      - run: goveralls -coverprofile=tests.coverprofile -repotoken=PzqT8p7uG5E7f2MwBoqeH1PgwZwxrKDja
+      - run: goveralls -coverprofile=tests.coverprofile -service=circle-ci -repotoken=PzqT8p7uG5E7f2MwBoqeH1PgwZwxrKDja
 #      - run:
 #          name: Run unit tests
 #          command: |
