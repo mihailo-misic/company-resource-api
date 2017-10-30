@@ -17,9 +17,10 @@ jobs:
       # Getting dependencies
       - run: go get -v -t -d ./...
       - run: go get github.com/mattn/goveralls
+      - run: go get github.com/onsi/ginkgo/ginkgo
 
       # Testing
-      - run: go test ./tests -v -cover -race -coverprofile=${TEST_RESULTS}/c.out
+      - run: ginkgo -r -cover -coverpkg=./... -trace -race -coverprofile=${TEST_RESULTS}/c.out
       - run:
           name: Run unit tests
           command: |
