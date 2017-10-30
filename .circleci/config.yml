@@ -25,13 +25,11 @@ jobs:
       - run:
           name: Run unit tests
           command: |
-            trap "goveralls -coverprofile=${TEST_RESULTS}/c.out -service=circle-ci -repotoken=yCn3klc8SDmcBsJmiov4DOGl5gLgdYlGq" EXIT
-            make test | tee ${TEST_RESULTS}/c.out
-      - run: make
+            goveralls -coverprofile=${TEST_RESULTS}/c.out -service=circle-ci -repotoken=yCn3klc8SDmcBsJmiov4DOGl5gLgdYlGq
 
       - store_artifacts:
-          path: $TEST_RESULTS
+          path: /tmp/test-results
           destination: raw-test-output
 
       - store_test_results:
-          path: $TEST_RESULTS
+          path: /tmp/test-results
