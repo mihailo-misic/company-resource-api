@@ -20,11 +20,11 @@ jobs:
     working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
     steps:
       - checkout
+      - go get -v -t -d ./...
 
     # specify any bash command here prefixed with `run: `
   test:
     pre:
-      - go get -v -t -d ./...
       - go get github.com/mattn/goveralls
     override:
       - go test -v -cover -race -coverprofile=/home/ubuntu/coverage.out
