@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	_ "github.com/mihailo-misic/company-resource-api/routers"
+	. "github.com/smartystreets/goconvey/convey"
 
 	"github.com/astaxie/beego"
 )
