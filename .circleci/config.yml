@@ -18,13 +18,16 @@ jobs:
       - run: go get -v -t -d ./...
       - run: go get github.com/mattn/goveralls
       - run: go get github.com/onsi/ginkgo/ginkgo
+      - run: go get github.com/modocache/gover
 
       # Testing
       - run: ginkgo -r -cover -coverpkg=./... -trace -race -coverprofile=${TEST_RESULTS}/c.out
-      - run:
-          name: Run unit tests
-          command: |
-            trap "goveralls -coverprofile=${TEST_RESULTS}/c.out -service=circle-ci -repotoken=${COVERALLS_TOKEN}" EXIT | tee ${TEST_RESULTS}/c.out
+      - run: gover
+      - run: goveralls -coverprofile=gover.coverprofile -reptoken${COVERALLS_TOKEN}
+#      - run:
+#          name: Run unit tests
+#          command: |
+#            trap "goveralls -coverprofile=${TEST_RESULTS}/c.out -service=circle-ci -repotoken=${COVERALLS_TOKEN}" EXIT | tee ${TEST_RESULTS}/c.out
 
       - store_artifacts:
           path: /tmp/test-results
