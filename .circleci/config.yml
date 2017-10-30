@@ -21,12 +21,12 @@ jobs:
     steps:
       - checkout
 
-      # specify any bash command here prefixed with `run: `
+    # specify any bash command here prefixed with `run: `
   test:
     pre:
-      - run: go get -v -t -d ./...
-      - run: go get github.com/mattn/goveralls
+      - go get -v -t -d ./...
+      - go get github.com/mattn/goveralls
     override:
-      - run: go test -v -cover -race -coverprofile=/home/ubuntu/coverage.out
+      - go test -v -cover -race -coverprofile=/home/ubuntu/coverage.out
     post:
       - /home/ubuntu/.go_workspace/bin/goveralls -coverprofile=/home/ubuntu/coverage.out -service=circle-ci -repotoken=yCn3klc8SDmcBsJmiov4DOGl5gLgdYlGq
