@@ -18,11 +18,10 @@ jobs:
       - run: go get -v -t -d ./...
       - run: go get github.com/mattn/goveralls
       - run: go get github.com/onsi/ginkgo/ginkgo
-      - run: go get github.com/modocache/gover
 
       # Testing
       - run: ginkgo -r -cover -coverpkg=./... -trace -race
-      - run: goveralls -coverprofile=tests.coverprofile -repotoken=yCn3klc8SDmcBsJmiov4DOGl5gLgdYlGq
+      - run: goveralls -coverprofile=tests.coverprofile -repotoken=1nu8etTMwLq8xPPPPOuqdexWhoJ0VP6j9
 #      - run:
 #          name: Run unit tests
 #          command: |
