@@ -19,7 +19,7 @@ jobs:
       - run: go get github.com/mattn/goveralls
 
       # Testing
-      - run: go test -v -cover -race -coverprofile=${TEST_RESULTS}/c.out
+      - run: go test ./tests -v -cover -race -coverprofile=${TEST_RESULTS}/c.out
       - run:
           name: Run unit tests
           command: |
