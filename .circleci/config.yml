@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - checkout
-      - run: mkdir -p $TEST_RESULTS
+      - run: mkdir -p ${TEST_RESULTS}
       # Getting deps
       - run: go get -v -t -d ./...
       - run: go get github.com/mattn/goveralls
