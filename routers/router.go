@@ -8,7 +8,7 @@
 package routers
 
 import (
-	"gitlab.com/mihailo-misic/company-resource-api/controllers"
+	"github.com/mihailo-misic/company-resource-api/controllers"
 
 	"github.com/astaxie/beego"
 )

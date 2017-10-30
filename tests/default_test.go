@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"testing"
 
-	_ "gitlab.com/mihailo-misic/company-resource-api/routers"
+	_ "github.com/mihailo-misic/company-resource-api/routers"
 
 	"github.com/astaxie/beego"
 )

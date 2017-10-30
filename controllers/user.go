@@ -3,7 +3,7 @@ package controllers
 import (
 	"encoding/json"
 
-	"gitlab.com/mihailo-misic/company-resource-api/models"
+	"github.com/mihailo-misic/company-resource-api/models"
 
 	"github.com/astaxie/beego"
 )

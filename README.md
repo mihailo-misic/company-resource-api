@@ -1,5 +1,7 @@
-# App for company resource menagment
+# App for company resource management
 [![go](https://img.shields.io/badge/Go-v1.9-orange.svg)](https://www.npmjs.com/)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mihailo-misic/company-resource-api)](https://goreportcard.com/report/github.com/mihailo-misic/company-resource-api)
+[![Coverage Status](https://coveralls.io/repos/github/mihailo-misic/company-resource-api/badge.svg?branch=master)](https://coveralls.io/github/mihailo-misic/company-resource-api?branch=master)
 
 API for company-resource management service built with Go.
 <br><br>

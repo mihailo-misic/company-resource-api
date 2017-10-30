@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "title": "Company Resource API",
-        "description": "API for the company-resource project https://gitlab.com/mihailo-misic/company-resource-api",
+        "description": "API for the company-resource project https://github.com/mihailo-misic/company-resource-api",
         "version": "1.0.0",
         "contact": {
             "email": "mihailo.misic@gmail.com"
