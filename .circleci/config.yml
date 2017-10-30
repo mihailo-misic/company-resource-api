@@ -1,6 +1,3 @@
-# Golang CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-go/ for more details
 version: 2
 jobs:
   build:
@@ -25,7 +22,8 @@ jobs:
       - run:
           name: Run unit tests
           command: |
-            goveralls -coverprofile=${TEST_RESULTS}/c.out -service=circle-ci -repotoken=yCn3klc8SDmcBsJmiov4DOGl5gLgdYlGq
+              trap "goveralls -coverprofile=${TEST_RESULTS}/c.out -service=circle-ci -repotoken=yCn3klc8SDmcBsJmiov4DOGl5gLgdYlGq" EXIT
+              | tee ${TEST_RESULTS}/c.out
 
       - store_artifacts:
           path: /tmp/test-results
