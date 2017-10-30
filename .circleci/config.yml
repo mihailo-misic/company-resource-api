@@ -23,7 +23,7 @@ jobs:
       # Testing
       - run: ginkgo -r -cover -coverpkg=./... -trace -race -coverprofile=${TEST_RESULTS}/c.out
       - run: gover
-      - run: goveralls -coverprofile=gover.coverprofile -reptoken=${COVERALLS_TOKEN}
+      - run: goveralls -coverprofile=gover.coverprofile -repotoken=${COVERALLS_TOKEN}
 #      - run:
 #          name: Run unit tests
 #          command: |
