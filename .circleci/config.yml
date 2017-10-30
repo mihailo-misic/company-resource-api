@@ -21,9 +21,9 @@ jobs:
       - run: go get github.com/modocache/gover
 
       # Testing
-      - run: ginkgo -r -cover -coverpkg=./... -trace -race -coverprofile=${TEST_RESULTS}/c.out
+      - run: ginkgo -r -cover -coverpkg=./... -trace -race
       - run: gover
-      - run: goveralls -coverprofile=gover.coverprofile -repotoken=${COVERALLS_TOKEN}
+      - run: goveralls -coverprofile=gover.coverprofile -repotoken=yCn3klc8SDmcBsJmiov4DOGl5gLgdYlGq
 #      - run:
 #          name: Run unit tests
 #          command: |
