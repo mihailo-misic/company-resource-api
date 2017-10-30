@@ -12,19 +12,17 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:9.4
 
-    #### TEMPLATE_NOTE: go expects specific checkout path representing url
-    #### expecting it in the form of
     working_directory: /go/src/github.com/mihailo-misic/company-resource-api
+
+    environment:
+          TEST_RESULTS: /tmp/test-results/
+
     steps:
       - checkout
+      - run: mkdir -p $TEST_RESULTS
+      # Getting deps
       - run: go get -v -t -d ./...
-
-    # specify any bash command here prefixed with `run: `
-#  test:
-#    docker:
-#      - image: circleci/golang:1.8
-#    working_directory: /go/src/github.com/mihailo-misic/company-resource-api
-#    steps:
       - run: go get github.com/mattn/goveralls
-      - run: go test -v -cover -race -coverprofile=/home/ubuntu/coverage.out
-      - run: /home/ubuntu/.go_workspace/bin/goveralls -coverprofile=/home/ubuntu/coverage.out -service=circle-ci -repotoken=yCn3klc8SDmcBsJmiov4DOGl5gLgdYlGq
+      # Testing
+      - run: go test -v -cover -race -coverprofile=${TEST_RESULTS}c.out
+      - run: goveralls -coverprofile=${TEST_RESULTS}c.out -service=circle-ci -repotoken=yCn3klc8SDmcBsJmiov4DOGl5gLgdYlGq
