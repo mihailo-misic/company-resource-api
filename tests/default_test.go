@@ -10,6 +10,7 @@ import (
 	_ "github.com/mihailo-misic/company-resource-api/routers"
 	. "github.com/smartystreets/goconvey/convey"
 
+	"fmt"
 	"github.com/astaxie/beego"
 )
 
@@ -26,7 +27,9 @@ func TestGet(t *testing.T) {
 	w := httptest.NewRecorder()
 	beego.BeeApp.Handlers.ServeHTTP(w, r)
 
-	beego.Trace("testing", "TestGet", "Code[%d]\n%s", w.Code, w.Body.String())
+	beego.Trace("testing", "TestGet", fmt.Sprintf("Code[%d]\n%s", w.Code, w.Body.String()))
+
+	fmt.Printf("\n%+v\n", w.HeaderMap)
 
 	Convey("Subject: Test Station Endpoint\n", t, func() {
 		Convey("Status Code Should Be 200", func() {
