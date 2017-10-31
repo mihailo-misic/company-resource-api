@@ -8,7 +8,7 @@ jobs:
 
     environment:
       TEST_RESULTS: /tmp/test-results
-      COVERALLS_TOKEN: yCn3klc8SDmcBsJmiov4DOGl5gLgdYlGq
+      COVERALLS_TOKEN: PzqT87uG5E7f2MwBoqeH1PgwZwxrKDja
 
     steps:
       - checkout
@@ -23,7 +23,7 @@ jobs:
       # Testing
       - run: ginkgo -r -cover -coverpkg=./... -trace -race
       - run: gover
-      - run: goveralls -coverprofile=gover.coverprofile -service=circle-ci -repotoken=PzqT8p7uG5E7f2MwBoqeH1PgwZwxrKDja
+      - run: goveralls -coverprofile=gover.coverprofile -service=circle-ci -repotoken=${COVERALLS_TOKEN}
 
       - store_artifacts:
           path: /tmp/test-results

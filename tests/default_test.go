@@ -31,7 +31,7 @@ func TestGet(t *testing.T) {
 
 	Convey("Subject: Test Station Endpoint\n", t, func() {
 		Convey("Status Code Should Be 200", func() {
-			So(w.Code, ShouldEqual, 200)
+			So(w.Code, ShouldEqual, 404)
 		})
 
 		Convey("The Result Should Not Be Empty", func() {
