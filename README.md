@@ -1,5 +1,5 @@
 # App for company resource management
-[![go](https://img.shields.io/badge/Go-v1.9-blue.svg)](https://www.npmjs.com/)
+[![go](https://img.shields.io/badge/Go-v1.9-blue.svg)](https://golang.org/dl/)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mihailo-misic/company-resource-api)](https://goreportcard.com/report/github.com/mihailo-misic/company-resource-api)
 [![Coverage Status](https://coveralls.io/repos/github/mihailo-misic/company-resource-api/badge.svg?branch=master)](https://coveralls.io/github/mihailo-misic/company-resource-api?branch=master)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/mihailo-misic/company-resource-api/blob/master/LICENSE)
