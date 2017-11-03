@@ -22,8 +22,8 @@ type UserController struct {
 func (u *UserController) Post() {
 	var user models.User
 	json.Unmarshal(u.Ctx.Input.RequestBody, &user)
-	uid := models.AddUser(user)
-	u.Data["json"] = map[string]string{"uid": uid}
+	id := models.AddUser(user)
+	u.Data["json"] = map[string]int{"id": id}
 	u.ServeJSON()
 }
 
@@ -38,15 +38,15 @@ func (u *UserController) GetAll() {
 }
 
 // @Title Get
-// @Description get user by uid
-// @Param	uid		path 	string	true		"The key for staticblock"
+// @Description get user by id
+// @Param	id		path 	string	true		"The key for staticblock"
 // @Success 200 {object} models.User
-// @Failure 403 :uid is empty
-// @router /:uid [get]
+// @Failure 403 :id is empty
+// @router /:id [get]
 func (u *UserController) Get() {
-	uid := u.GetString(":uid")
-	if uid != "" {
-		user, err := models.GetUser(uid)
+	id := u.GetString(":id")
+	if id != "" {
+		user, err := models.GetUser(id)
 		if err != nil {
 			u.Data["json"] = err.Error()
 		} else {
@@ -58,17 +58,17 @@ func (u *UserController) Get() {
 
 // @Title Update
 // @Description update the user
-// @Param	uid		path 	string	true		"The uid you want to update"
+// @Param	id		path 	string	true		"The id you want to update"
 // @Param	body		body 	models.User	true		"body for user content"
 // @Success 200 {object} models.User
-// @Failure 403 :uid is not int
-// @router /:uid [put]
+// @Failure 403 :id is not int
+// @router /:id [put]
 func (u *UserController) Put() {
-	uid := u.GetString(":uid")
-	if uid != "" {
+	id := u.GetString(":id")
+	if id != "" {
 		var user models.User
 		json.Unmarshal(u.Ctx.Input.RequestBody, &user)
-		uu, err := models.UpdateUser(uid, &user)
+		uu, err := models.UpdateUser(id, &user)
 		if err != nil {
 			u.Data["json"] = err.Error()
 		} else {
@@ -80,13 +80,13 @@ func (u *UserController) Put() {
 
 // @Title Delete
 // @Description delete the user
-// @Param	uid		path 	string	true		"The uid you want to delete"
+// @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
-// @Failure 403 uid is empty
-// @router /:uid [delete]
+// @Failure 403 id is empty
+// @router /:id [delete]
 func (u *UserController) Delete() {
-	uid := u.GetString(":uid")
-	models.DeleteUser(uid)
+	id := u.GetString(":id")
+	models.DeleteUser(id)
 	u.Data["json"] = "delete success!"
 	u.ServeJSON()
 }
