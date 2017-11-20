@@ -11,15 +11,15 @@ import (
 func init() {
 	// Setting up Database and ORM.
 	orm.RegisterDriver("postgres", orm.DRPostgres)
-	orm.RegisterDataBase("crm", "postgres", "postgres://postgres:secret@localhost/crm?sslmode=disable&charset=utf8")
+	orm.RegisterDataBase("default", "postgres", "postgres://postgres:secret@localhost/crm?sslmode=disable")
 }
 
 func main() {
 	if beego.BConfig.RunMode == "dev" {
 		beego.BConfig.WebConfig.DirectoryIndex = true
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
+		orm.RunSyncdb("default", false, true)
 	}
 
 	beego.Run()
-	orm.RunSyncdb("crm", false, false)
 }
