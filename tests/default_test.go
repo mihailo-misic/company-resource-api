@@ -8,8 +8,10 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/astaxie/beego"
 	_ "github.com/mihailo-misic/company-resource-api/routers"
+	. "github.com/smartystreets/goconvey/convey"
+
+	"github.com/astaxie/beego"
 )
 
 func init() {
