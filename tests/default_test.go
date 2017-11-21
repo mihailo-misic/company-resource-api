@@ -1,17 +1,15 @@
 package test
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"path/filepath"
 	"runtime"
 	"testing"
 
-	_ "github.com/mihailo-misic/company-resource-api/routers"
-	. "github.com/smartystreets/goconvey/convey"
-
-	"fmt"
 	"github.com/astaxie/beego"
+	_ "github.com/mihailo-misic/company-resource-api/routers"
 )
 
 func init() {
@@ -31,7 +29,7 @@ func TestGet(t *testing.T) {
 
 	Convey("Subject: Test Station Endpoint\n", t, func() {
 		Convey("Status Code Should Be 200", func() {
-			So(w.Code, ShouldEqual, 404)
+			So(w.Code, ShouldEqual, 200)
 		})
 
 		Convey("The Result Should Not Be Empty", func() {
