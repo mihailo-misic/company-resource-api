@@ -43,14 +43,13 @@ func AddUser(user User) (id int64) {
 func GetUser(id int64) (user User, err error) {
 	o = orm.NewOrm()
 	user = User{Id: id}
-	o.Read(&user)
+	err = o.Read(&user)
 
 	if err == orm.ErrNoRows {
 		fmt.Println("No result found.")
 	} else if err == orm.ErrMissPK {
 		fmt.Println("No primary key found.")
 	} else {
-		fmt.Printf("%+v\n", user)
 		return user, nil
 	}
 
@@ -60,7 +59,7 @@ func GetUser(id int64) (user User, err error) {
 func GetAllUsers() (users []*User) {
 	o = orm.NewOrm()
 	num, err := o.QueryTable("user").All(&users)
-	fmt.Printf("Returned Rows Num: %s, %s", num, err)
+	fmt.Printf("Returned Rows Num: %s, %s\n", num, err)
 
 	return users
 }
@@ -91,9 +90,7 @@ func UpdateUser(id int64, user *User) (*User, error) {
 			oldUser.Image = user.Image
 		}
 
-		if num, err := o.Update(&oldUser); err == nil {
-			fmt.Println(num)
-
+		if _, err := o.Update(&oldUser); err == nil {
 			return &oldUser, nil
 		}
 	}
@@ -103,22 +100,31 @@ func UpdateUser(id int64, user *User) (*User, error) {
 
 func DeleteUser(id int64) (err error) {
 	o = orm.NewOrm()
-	num, err := o.Delete(&User{Id: id})
+	_, err = o.Delete(&User{Id: id})
 	if err != nil {
 		return err
 	}
 
-	fmt.Println(num)
 	return nil
 }
 
 func Login(email, password string) (suc bool) {
 	o = orm.NewOrm()
-	// TODO
-	return false
+	user := User{Email: email}
+
+	err := o.Read(&user, "Email")
+	if err != nil {
+		return false
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+
+	// TODO Improve (implement JWT Auth)
+
+	return err == nil
 }
 
 func Logout() (suc bool) {
-	// TODO
+	// TODO (requires JWT Auth)
 	return false
 }
