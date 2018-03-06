@@ -8,13 +8,18 @@ import (
 	"runtime"
 	"testing"
 
+	_ "github.com/lib/pq"
 	_ "github.com/mihailo-misic/company-resource-api/routers"
 	. "github.com/smartystreets/goconvey/convey"
 
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/orm"
 )
 
 func init() {
+	orm.RegisterDriver("postgres", orm.DRPostgres)
+	orm.RegisterDataBase("default", "postgres", "postgres://postgres:secret@localhost/crm?sslmode=disable")
+
 	_, file, _, _ := runtime.Caller(1)
 	appPath, _ := filepath.Abs(filepath.Dir(filepath.Join(file, "..")))
 	appPath = filepath.Join(appPath, "..")

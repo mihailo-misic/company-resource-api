@@ -59,7 +59,7 @@ func GetUser(id int64) (user User, err error) {
 func GetAllUsers() (users []*User) {
 	o = orm.NewOrm()
 	num, err := o.QueryTable("user").All(&users)
-	fmt.Printf("Returned Rows Num: %s, %s\n", num, err)
+	fmt.Printf("Returned Rows Num: %v, %s\n", num, err)
 
 	return users
 }
