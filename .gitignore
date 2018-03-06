@@ -3,6 +3,7 @@
 company-resource-api
 lastupdate.tmp
 commentsRouter_*.go
+tests.coverprofile
 
 
 # Created by .ignore support plugin (hsz.mobi)
