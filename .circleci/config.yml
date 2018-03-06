@@ -4,11 +4,6 @@ jobs:
     docker:
       - image: circleci/golang:1.9
 
-      - image: circleci/postgres:9.6.2-alpine
-        environment:
-          - POSTGRES_USER: root
-          - POSTGRES_DB: crm
-
     working_directory: /go/src/github.com/mihailo-misic/company-resource-api
 
     environment:
@@ -28,7 +23,7 @@ jobs:
       - run: go get github.com/modocache/gover
 
       # Testing
-      - run: ginkgo -r -cover -coverpkg=./... -trace -race
+      #- run: ginkgo -r -cover -coverpkg=./... -trace -race
       - run: gover
       - run: goveralls -coverprofile=gover.coverprofile -service=circle-ci -repotoken=PzqT8p7uG5E7f2MwBoqeH1PgwZwxrKDja
 
