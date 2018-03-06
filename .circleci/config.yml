@@ -13,9 +13,6 @@ jobs:
       - checkout
       - run: mkdir -p $TEST_RESULTS
 
-      # Setting up Postgres
-      - run: sudo apt install postgresql-client
-
       # Getting dependencies
       - run: go get -v -t -d ./...
       - run: go get github.com/mattn/goveralls
