@@ -23,11 +23,9 @@ jobs:
       - run:
       # Add a password to the `ubuntu` user, since Postgres is configured to
       # always ask for a password without sudo, and fails without one.
-          command: "sudo cut -d: -f1 /etc/passwd"
-          command: sudo -u postgres psql -p 5433 -c "create user ubuntu with password 'secret';"
-          command: sudo -u postgres psql -p 5433 -c "alter user ubuntu with superuser;"
+          command: "echo cut -d: -f1 /etc/passwd"
       # Create a new test database.
-          command: sudo -u ubuntu psql -p 5433 -c "create database crm;"
+          command: psql -p 5433 -c "create database crm;"
 
       # Getting dependencies
       - run: go get -v -t -d ./...
