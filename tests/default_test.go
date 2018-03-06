@@ -17,8 +17,11 @@ import (
 )
 
 func init() {
-	orm.RegisterDriver("postgres", orm.DRPostgres)
-	orm.RegisterDataBase("default", "postgres", "postgres://postgres:secret@localhost/crm?sslmode=disable")
+	_, err := orm.GetDB("default")
+	if err != nil {
+		orm.RegisterDriver("postgres", orm.DRPostgres)
+		orm.RegisterDataBase("default", "postgres", "postgres://postgres:secret@localhost/crm?sslmode=disable")
+	}
 
 	_, file, _, _ := runtime.Caller(1)
 	appPath, _ := filepath.Abs(filepath.Dir(filepath.Join(file, "..")))
