@@ -32,7 +32,6 @@ func (u *UserController) Post() {
 // @router / [get]
 func (u *UserController) GetAll() {
 	users := models.GetAllUsers()
-	panic(users)
 	u.Data["json"] = users
 	u.ServeJSON()
 }
