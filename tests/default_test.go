@@ -31,6 +31,7 @@ func init() {
 
 // TestGet is a sample to run an endpoint test
 func TestGet(t *testing.T) {
+	panic(beego.BConfig.RunMode)
 	r, _ := http.NewRequest("GET", "/v1/user", nil)
 	w := httptest.NewRecorder()
 	beego.BeeApp.Handlers.ServeHTTP(w, r)
