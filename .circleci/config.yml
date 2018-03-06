@@ -20,7 +20,13 @@ jobs:
 
       # Setting up Postgres
       - run: sudo apt install postgresql-client
-      - run: sudo -u postgres psql -p 5433 -c "create database crm;"
+      - run:
+      # Add a password to the `ubuntu` user, since Postgres is configured to
+      # always ask for a password without sudo, and fails without one.
+          command: sudo -u postgres psql -p 5433 -c "create user ubuntu with password 'ubuntu';"
+          command: sudo -u postgres psql -p 5433 -c "alter user ubuntu with superuser;"
+      # Create a new test database.
+          command: sudo -u postgres psql -p 5433 -c "create database crm;"
 
       # Getting dependencies
       - run: go get -v -t -d ./...
