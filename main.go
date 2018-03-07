@@ -4,6 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	c "github.com/mihailo-misic/company-resource-api/controllers"
 	"github.com/mihailo-misic/company-resource-api/database"
+	"os"
+	"io"
 )
 
 func setupRouter() *gin.Engine {
@@ -36,6 +38,11 @@ func setupRouter() *gin.Engine {
 }
 
 func main() {
+	// Setup logging
+	gin.DisableConsoleColor()
+	f, _ := os.Create("crm.log")
+	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+
 	// Setup database
 	db := database.Init()
 	defer db.Close()
