@@ -1,5 +1,5 @@
 # Company Resource Management API
-[![go](https://img.shields.io/badge/Go-v1.9-blue.svg)](https://golang.org/dl/)
+[![go](https://img.shields.io/badge/Go-v1.10-blue.svg)](https://golang.org/dl/)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mihailo-misic/company-resource-api)](https://goreportcard.com/report/github.com/mihailo-misic/company-resource-api)
 [![Coverage Status](https://coveralls.io/repos/github/mihailo-misic/company-resource-api/badge.svg?branch=master)](https://coveralls.io/github/mihailo-misic/company-resource-api?branch=master)
 [![CircleCI](https://img.shields.io/circleci/project/github/mihailo-misic/company-resource-api.svg)](https://circleci.com/gh/mihailo-misic/company-resource-api)
@@ -11,16 +11,17 @@ API for company-resource management service built with Go.
 
 
 ## Development Requirements
-- **[Go > v1.9](https://golang.org/dl/)**
-- **[Beego - Framework](https://github.com/astaxie/beego)**
-- **[Beego's bee - CLI](https://github.com/beego/bee)**
+- **[Go > v1.10](https://golang.org/dl/)**
+- **[Gin Gonic - Framework](https://github.com/gin-gonic/gin)**
+- **[Dep - Dependency Manager](https://golang.github.io/dep/docs/installation.html)**
+- **[Fresh - Live Reload](https://github.com/pilu/fresh)**
 <br>
 
 
 ## Start-up
 Inside the project's root run:
 ```bash
-bee run
+fresh
 ```
 
 
@@ -30,12 +31,15 @@ bee run
 3. Run:
 
 ```bash
-bee run
+dep ensure
+fresh
 ```
 
 
 ## Packages
-- **[Beego](https://github.com/astaxie/beego)**
+- **[Gin Gonic](https://github.com/gin-gonic/gin)**
+- **[GORM](http://gorm.io/)**
+- **[Fresh](https://github.com/pilu/fresh)**
 <br>
 
 
@@ -44,9 +48,3 @@ To run tests use:
 ```bash
 go test ./...
 ```
-
-
-## Documentation
-Documentation is generated using [Swagger](https://swagger.io/).<br>
-To view the documentation after running the app via `bee run` visit:<br>
-http://localhost:8080/swagger 

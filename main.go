@@ -2,60 +2,47 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	c "github.com/mihailo-misic/company-resource-api/controllers"
+	"github.com/mihailo-misic/company-resource-api/database"
 )
-
-var DB = make(map[string]string)
 
 func setupRouter() *gin.Engine {
 	r := gin.Default()
 
-	// Ping test
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(200, "pong")
-	})
-
-	// Get user value
-	r.GET("/user/:name", func(c *gin.Context) {
-		user := c.Params.ByName("name")
-		value, ok := DB[user]
-		if ok {
-			c.JSON(200, gin.H{"user": user, "value": value})
-		} else {
-			c.JSON(200, gin.H{"user": user, "status": "no value"})
+	v1 := r.Group("/api/v1")
+	{
+		// Users
+		users := v1.Group("/users")
+		{
+			users.POST("/", c.CreateUser)
+			users.GET("/", c.GetUsers)
+			users.GET("/:id", c.GetUser)
+			users.PUT("/:id", c.UpdateUser)
+			users.DELETE("/:id", c.DeleteUser)
 		}
-	})
-
-	// Authorized group (uses gin.BasicAuth() middleware)
-	// Same than:
-	// authorized := r.Group("/")
-	// authorized.Use(gin.BasicAuth(gin.Credentials{
-	//	  "foo":  "bar",
-	//	  "manu": "123",
-	//}))
-	authorized := r.Group("/", gin.BasicAuth(gin.Accounts{
-		"foo":  "bar", // user:foo password:bar
-		"manu": "123", // user:manu password:123
-	}))
-
-	authorized.POST("admin", func(c *gin.Context) {
-		user := c.MustGet(gin.AuthUserKey).(string)
-
-		// Parse JSON
-		var json struct {
-			Value string `json:"value" binding:"required"`
+		// Products
+		products := v1.Group("/products")
+		{
+			products.POST("/", c.CreateProduct)
+			products.GET("/", c.GetProducts)
+			products.GET("/:id", c.GetProduct)
+			products.PUT("/:id", c.UpdateProduct)
+			products.DELETE("/:id", c.DeleteProduct)
 		}
-
-		if c.Bind(&json) == nil {
-			DB[user] = json.Value
-			c.JSON(200, gin.H{"status": "ok"})
-		}
-	})
+		// Auth
+	}
 
 	return r
 }
 
 func main() {
+	// Setup database
+	db := database.Init()
+	defer db.Close()
+
+	// Setup routing
 	r := setupRouter()
 
-	r.Run(":8080") // Listen and Server in localhost:8080
+	// Run the api on: localhost:8080
+	r.Run(":8080")
 }
