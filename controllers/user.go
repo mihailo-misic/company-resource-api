@@ -11,7 +11,7 @@ import (
 func CreateUser(c *gin.Context) {
 	var user m.User
 	if err := c.BindJSON(&user); err != nil {
-		c.JSON(http.StatusBadRequest, res.Err(res.Error{"Could not bind to JSON", "Error occured while binding the data to JSON", err}))
+		c.JSON(http.StatusBadRequest, res.Err(res.Error{"Could not parse the data", "Error occurred while parsing the data", err}))
 		return
 	}
 
@@ -21,7 +21,7 @@ func CreateUser(c *gin.Context) {
 		c.JSON(http.StatusOK, res.Data(user))
 		return
 	}
-	c.JSON(http.StatusBadRequest, res.Err(res.Error{"Email taken", "The chosen email is already taken", nil}))
+	c.JSON(http.StatusBadRequest, res.Err(res.Error{"Could not create the user", "An error occurred while creating the new user", nil}))
 }
 
 // [GET] all
@@ -45,7 +45,10 @@ func UpdateUser(c *gin.Context) {
 	// Find the user
 	db.First(&user, id)
 	// Parse the request data
-	c.BindJSON(&newUser)
+	if err := c.BindJSON(&newUser); err != nil {
+		c.JSON(http.StatusBadRequest, res.Err(res.Error{"Could not parse the data", "Error occurred while parsing the data", err}))
+		return
+	}
 	// Update the user in the database
 	db.Model(&user).Updates(newUser)
 
@@ -63,5 +66,5 @@ func DeleteUser(c *gin.Context) {
 		c.JSON(http.StatusOK, res.Data(user))
 	}
 
-	c.JSON(http.StatusBadRequest, res.Err(res.Error{"Email taken", "The chosen email is already taken", nil}))
+	c.JSON(http.StatusBadRequest, res.Err(res.Error{"Unable to delete", "Error occurred while deleting the user", nil}))
 }

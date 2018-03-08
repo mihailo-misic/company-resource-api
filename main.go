@@ -6,6 +6,7 @@ import (
 	"github.com/mihailo-misic/company-resource-api/database"
 	"os"
 	"io"
+	"log"
 )
 
 func setupRouter() *gin.Engine {
@@ -45,11 +46,15 @@ func main() {
 
 	// Setup database
 	db := database.Init()
-	defer db.Close()
+	defer func() {
+		if err := db.Close(); err != nil {
+			panic(err)
+		}
+	}()
 
 	// Setup routing
 	r := setupRouter()
 
 	// Run the api on: "localhost:8080"
-	r.Run(":8080")
+	log.Fatal(r.Run(":8080"))
 }
