@@ -38,10 +38,10 @@ func setupRouter() *gin.Engine {
 }
 
 func main() {
+	var f *os.File
 	// Setup logging
-	gin.DisableConsoleColor()
-	f, _ := os.Create("crm.log")
-	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+	f, _ = os.OpenFile("crm.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	gin.DefaultWriter = io.MultiWriter(os.Stdout, f)
 
 	// Setup database
 	db := database.Init()
@@ -50,6 +50,6 @@ func main() {
 	// Setup routing
 	r := setupRouter()
 
-	// Run the api on: localhost:8080
+	// Run the api on: "localhost:8080"
 	r.Run(":8080")
 }

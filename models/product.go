@@ -1,19 +1,24 @@
 package models
 
-import "github.com/jinzhu/gorm"
+import (
+	"time"
+)
 
 type (
 	// Product describes a Product type
 	Product struct {
-		gorm.Model
-		Name           string `json:"name"`
-		Type           int    `json:"type"`
-		Price          int    `json:"price"`
-		Url            string `json:"url"`
-		Image          string `json:"image"`
-		BreakpointUp   int    `gorm:"column:breakpoint_up"json:"breakpointUp"`
-		BreakpointDown int    `gorm:"column:breakpoint_down"json:"breakpointDown"`
-		Amount         int    `json:"amount"`
+		ID             uint       `json:"id" gorm:"primary_key"`
+		CreatedAt      time.Time  `json:"created-at"`
+		UpdatedAt      time.Time  `json:"updated-at"`
+		DeletedAt      *time.Time `json:"deleted-at" sql:"index"`
+		Name           string     `json:"name"`
+		Type           int        `json:"type"`
+		Price          int        `json:"price"`
+		Url            string     `json:"url"`
+		Image          string     `json:"image"`
+		BreakpointUp   int        `json:"breakpoint-up" gorm:"column:breakpoint_up"`
+		BreakpointDown int        `json:"breakpoint-down" gorm:"column:breakpoint_down"`
+		Amount         int        `json:"amount"`
 	}
 	// ResProduct represents a formatted Product
 	ResProduct struct {
@@ -23,8 +28,8 @@ type (
 		Price          int    `json:"price"`
 		Url            string `json:"url"`
 		Image          string `json:"image"`
-		BreakpointUp   int    `json:"breakpointUp"`
-		BreakpointDown int    `json:"breakpointDown"`
+		BreakpointUp   int    `json:"breakpoint-up"`
+		BreakpointDown int    `json:"breakpoint-down"`
 		Amount         int    `json:"amount"`
 	}
 )
