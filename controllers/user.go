@@ -3,8 +3,8 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 	m "github.com/mihailo-misic/company-resource-api/models"
-	"net/http"
 	"github.com/mihailo-misic/company-resource-api/res"
+	"net/http"
 )
 
 // [POST] create
