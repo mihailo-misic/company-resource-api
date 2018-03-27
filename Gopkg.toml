@@ -24,8 +24,6 @@
 #   go-tests = true
 #   unused-packages = true
 
-required = ["github.com/pilu/fresh"]
-
 [[constraint]]
   name = "github.com/gin-gonic/gin"
   version = "1.2.0"
@@ -37,7 +35,3 @@ required = ["github.com/pilu/fresh"]
 [[constraint]]
   name = "github.com/jinzhu/gorm"
   version = "1.9.1"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/pilu/fresh"
