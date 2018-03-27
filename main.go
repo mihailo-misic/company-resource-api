@@ -1,12 +1,13 @@
 package main
 
 import (
+	"io"
+	"log"
+	"os"
+
 	"github.com/gin-gonic/gin"
 	c "github.com/mihailo-misic/company-resource-api/controllers"
 	"github.com/mihailo-misic/company-resource-api/database"
-	"os"
-	"io"
-	"log"
 )
 
 func setupRouter() *gin.Engine {

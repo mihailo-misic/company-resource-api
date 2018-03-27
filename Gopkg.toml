@@ -24,6 +24,7 @@
 #   go-tests = true
 #   unused-packages = true
 
+required = ["github.com/pilu/fresh"]
 
 [[constraint]]
   name = "github.com/gin-gonic/gin"
